@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SS BUDGET TOOL CLAUDE</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400&family=Instrument+Sans:wght@400;500&family=Instrument+Serif&display=swap" rel="stylesheet">
+<style>
+:root{--sage:#748969;--dark:#4A5A4E;--bg:#F9F7F2;--card:#F5F1EB;--ink:#2B2B24;--mist:#E8EBE0;--lav:#C5B7D4;--line:#d9d6cb;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d211e;--card:#262b27;--ink:#efece4;--mist:#2f362f;--line:#3a423a;--dark:#9db393}}
+:root[data-theme="dark"]{--bg:#1d211e;--card:#262b27;--ink:#efece4;--mist:#2f362f;--line:#3a423a;--dark:#9db393}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 'Instrument Sans',system-ui,sans-serif}
+h1,h2,h3,.cap{font-family:'Sora',system-ui,sans-serif;font-weight:300;text-transform:uppercase;letter-spacing:.14em}
+.num{font-family:'Instrument Serif',Georgia,serif}
+header{background:#4A5A4E;color:#F9F7F2;padding:18px 20px;display:flex;align-items:center;gap:12px;justify-content:space-between}
+header .brand{display:flex;align-items:center;gap:12px;font-family:'Sora',sans-serif;font-weight:300;letter-spacing:.16em;font-size:15px}
+.logo{width:34px;height:34px;border-radius:50%;border:2px solid #9db393;display:grid;place-items:center;font:26px 'Instrument Serif',serif;color:#cfe0c6}
+#qx{background:transparent;border:1px solid #cfe0c6;color:#F9F7F2;border-radius:99px;padding:7px 14px;font:500 12px 'Instrument Sans';letter-spacing:.08em;cursor:pointer}
+main{max-width:760px;margin:0 auto;padding:24px 18px 60px}
+h1{font-size:20px;margin:6px 0 6px}h2{font-size:14px;margin:30px 0 12px;color:var(--dark)}
+p.sub{margin:0 0 18px;opacity:.8}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px;opacity:.75}
+input,select{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:400 16px 'Instrument Sans'}
+input:focus,select:focus,button:focus-visible{outline:3px solid var(--lav);outline-offset:1px}
+.go{margin-top:16px;width:100%;background:var(--sage);color:#fff;border:0;border-radius:99px;padding:14px;font:500 15px 'Instrument Sans';letter-spacing:.06em;cursor:pointer}
+.go:disabled{opacity:.6}
+.pill{display:inline-block;padding:5px 13px;border-radius:99px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.g0{background:var(--sage);color:#fff}.g1{background:var(--lav);color:#2B2B24}.g2{border:1.5px solid var(--sage)}.g3{background:var(--mist)}
+.row{display:flex;gap:10px;align-items:center;padding:7px 0;border-bottom:1px dashed var(--line)}
+.row span{flex:1}.row .amt{width:110px;text-align:right}.row small{opacity:.6;display:block;font-size:12px}
+.tot{text-align:center;padding:24px 14px}.tot .big{font-size:56px;line-height:1;margin:6px 0}
+.proj{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.proj div{background:var(--bg);border-radius:12px;padding:10px 4px;border:1px solid var(--line)}
+.proj b{display:block;font:400 26px 'Instrument Serif',serif}
+.res{border-left:4px solid var(--lav);padding:10px 14px;margin:10px 0;background:var(--card);border-radius:0 12px 12px 0}
+.res b{display:block}.res em{font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.7;font-style:normal}
+ul.ck{padding-left:20px}ul.ck li{margin:6px 0}
+.note{font-size:13px;opacity:.75;margin-top:10px}.err{color:#a14;margin-top:10px}
+.hot{background:var(--mist);border-radius:14px;padding:12px 16px;margin-top:18px;font-size:14px}
+@media(max-width:480px){.grid{grid-template-columns:1fr}}
+</style></head><body>
+<header><div class="brand"><div class="logo">8</div>SOPHIE + SAGE</div><button id="qx" aria-label="Quick exit, clears this page">QUICK EXIT</button></header>
+<main>
+<h1>Your 30/60/90-day survival budget</h1>
+<p class="sub">A gentle way to see what a fresh start could cost. Nothing you enter is saved or shared.</p>
+<div class="card">
+<div class="grid">
+<div><label for="zip">Zip code</label><input id="zip" inputmode="numeric" maxlength="5" placeholder="e.g. 80202"></div>
+<div><label for="bd">Bedrooms</label><select id="bd"><option>Studio</option><option>1</option><option selected>2</option><option>3</option><option>4</option></select></div>
+<div><label for="ba">Bathrooms</label><select id="ba"><option>1</option><option>1.5</option><option>2</option><option>3</option></select></div>
+<div><label for="ppl">People moving</label><select id="ppl"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div>
+<div><label for="car">Have a car?</label><select id="car"><option>Yes</option><option>No</option></select></div>
+<div><label for="mv">Moving help</label><select id="mv"><option>Hired movers</option><option>Rental truck, I load it</option><option>Few boxes, car only</option></select></div>
+</div>
+<button class="go" id="go">BUILD MY BUDGET</button>
+<div id="msg" class="note" role="status"></div>
+</div>
+<div id="out" hidden>
+<h2>What it may cost</h2>
+<div id="area" class="note" style="margin:-6px 0 8px"></div>
+<div id="items" class="card"></div>
+<div class="card tot" style="margin-top:14px"><div class="cap">Move-in costs, one time</div><div class="num big" id="once"></div>
+<div class="cap" style="margin-top:12px">Monthly budget</div><div class="num big" id="mon" style="font-size:40px"></div>
+<div class="proj"><div><span class="cap" style="font-size:10px">30 days</span><b id="p30"></b></div><div><span class="cap" style="font-size:10px">60 days</span><b id="p60"></b></div><div><span class="cap" style="font-size:10px">90 days</span><b id="p90"></b></div></div>
+<div class="note">Estimates only. Tap any amount to change it with a real quote.</div></div>
+<h2>Help that may cover it</h2>
+<div id="res" class="note">Looking for grants and waivers…</div>
+<h2>Also worth planning for</h2>
+<div class="card"><ul class="ck">
+<li>Ask about an <b>address confidentiality program</b> in your state, so your new address stays private.</li>
+<li>Put utilities in a different name or ask about <b>safety holds</b> on your account.</li>
+<li>Gather ID, birth certificates, benefit and medical papers. Photograph or store copies somewhere safe.</li>
+<li>Look into <b>lease-break rights</b> for survivors and <b>emergency housing transfers</b> if you are in assisted housing.</li>
+<li>Ask about <b>crime victim compensation</b>, which can cover relocation costs.</li>
+<li>Plan a new phone plan, bank account, and mail forwarding that the other person cannot see.</li>
+<li>Ask legal aid about protective orders and custody, they are often free for survivors.</li>
+<li>Check <b>SNAP, Medicaid and childcare assistance</b>, many have fast-track rules for survivors.</li>
+<li>Pets: ask about safe-haven foster programs and renter pet deposits.</li></ul></div>
+</div>
+<div class="hot">If you are in danger, call 911. National Domestic Violence Hotline: <b>1-800-799-7233</b> or text START to 88788. Confidential, 24/7.</div>
+<p class="note">Founder-led · Survivor-led · Trauma-informed · Confidential &amp; compassionate support</p>
+</main>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const fmt=n=>'$'+Math.round(n||0).toLocaleString('en-US');
+let items=[];
+$('#qx').onclick=()=>{document.body.innerHTML='';try{window.top.location.replace('https://www.weather.com')}catch(e){location.replace('https://www.weather.com')}};
+function totals(){
+ const once=items.filter(i=>i.kind==='once').reduce((a,i)=>a+i.amount,0),mon=items.filter(i=>i.kind==='monthly').reduce((a,i)=>a+i.amount,0);
+ $('#once').textContent=fmt(once);$('#mon').textContent=fmt(mon);
+ [1,2,3].forEach(m=>$('#p'+m*30).textContent=fmt(once+mon*m));
+}
+function render(){
+ const groups=[...new Set(items.map(i=>i.group))];
+ $('#items').innerHTML=groups.map((g,gi)=>'<span class="pill g'+(gi%4)+'">'+g+'</span>'+items.map((it,i)=>it.group===g?'<div class="row"><span>'+esc(it.name)+'<small>'+(it.kind==='once'?'one time':'per month')+'</small></span><input class="amt" inputmode="decimal" data-i="'+i+'" value="'+Math.round(it.amount)+'" aria-label="'+esc(it.name)+'"></div>':'').join('')).join('<div style="height:10px"></div>');
+ $$('.amt').forEach(el=>el.oninput=()=>{items[el.dataset.i].amount=parseFloat(el.value.replace(/[^0-9.]/g,''))||0;totals()});
+ totals();
+}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+$('#go').onclick=async()=>{
+ const zip=$('#zip').value.trim();
+ if(!/^\d{5}$/.test(zip)){$('#msg').textContent='Please enter a 5-digit zip code.';return}
+ const sample=await claude.use('sample');
+ if(!sample){$('#msg').textContent='The estimate helper is not available right now.';return}
+ const spec=`zip ${zip}; ${$('#bd').value} bedroom, ${$('#ba').value} bath rental; ${$('#ppl').value} people; car: ${$('#car').value}; moving: ${$('#mv').value}`;
+ $('#go').disabled=true;$('#msg').textContent='Gathering estimates for your area…';$('#out').hidden=true;
+ try{
+  const d=await sample.json(`You help women leaving domestic violence plan a move without a shelter. Estimate realistic current costs for this situation: ${spec}. Respond ONLY with JSON: {"area":"City, ST","items":[{"name":"","group":"","amount":0,"kind":"once"|"monthly"}]}. Groups must be exactly: Housing, Utilities, Moving, Daily living. Include: rent (monthly), security deposit, application fees, first month if typical; electric, gas, water/sewer, trash, internet, phone, and each utility's typical new-account deposit (once); movers or truck rental, boxes and supplies, storage unit, fuel or transport; groceries, transport, household basics (once), childcare if more than 2 people. Whole US dollars, local-market realistic. No commentary.`,{modelTier:'default'});
+  items=(d.items||[]).map(i=>({name:i.name,group:i.group||'Other',amount:+i.amount||0,kind:i.kind==='once'?'once':'monthly'}));
+  $('#area').textContent='Estimates for '+(d.area||zip)+'. Based on typical local ranges, not live listings.';
+  $('#out').hidden=false;$('#msg').textContent='';render();
+  $('#out').scrollIntoView({behavior:'smooth'});
+  resources(sample,d.area||zip,spec);
+ }catch(e){$('#msg').textContent='Something went wrong. Please try again in a moment.';}
+ $('#go').disabled=false;
+};
+async function resources(sample,area,spec){
+ const box=$('#res');box.textContent='Looking for grants and waivers…';
+ try{
+  const r=await sample.json(`List real, well-known programs that could help a woman leaving a domestic violence relationship (without entering a shelter) cover housing deposits, rent, moving, and utility costs near ${area}. Include: federal and state programs, rapid rehousing, victim compensation, utility assistance (LIHEAP) and utility-company hardship or deposit waivers for survivors, and nonprofit relocation grants. Do not invent names or phone numbers; if unsure, describe the program type and tell her to search the official state site. Respond ONLY with JSON: {"programs":[{"name":"","type":"Grant|Utility waiver|Housing|Benefit","help":"one sentence on what it covers","how":"one sentence on how to apply"}]}. Max 8 items.`,{modelTier:'default'});
+  box.className='';box.innerHTML=(r.programs||[]).map(p=>'<div class="res"><em>'+esc(p.type||'')+'</em><b>'+esc(p.name)+'</b>'+esc(p.help||'')+' <br><span class="note">'+esc(p.how||'')+'</span></div>').join('')+'<div class="note">Please confirm eligibility and details with each program. Funding changes often.</div>';
+ }catch(e){box.textContent='Could not load resources. Call the hotline above, advocates can point you to local funds.'}
+}
+</script></body></html>
